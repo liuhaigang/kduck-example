@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:;MODE=MYSQL;INIT=RUNSCRIPT FROM './db/tables.sql'
+    driver-class-name: org.h2.Driver
+logging:
+  level:
+    root: error
+    cn.kduck: info
+
+kduck:
+  showSql:
+    enabled: true
+
+server:
+  port: 8000
