@@ -38,7 +38,7 @@ public class StudentInfo extends ValueMap {
      *
      * @return 学生ID
      */
-    public long getStudentId() {
+    public Long getStudentId() {
         return super.getValueAsLong(STUDENT_ID);
     }
 
@@ -47,7 +47,7 @@ public class StudentInfo extends ValueMap {
      *
      * @param classId 班级ID
      */
-    public void setClassId(long classId) {
+    public void setClassId(Long classId) {
         super.setValue(CLASS_ID, classId);
     }
 

@@ -87,7 +87,12 @@ public class DemoController {
     @ApiParamRequest({
             @ApiField(name="studentId",value="学生ID")
     })
-    @ApiJsonResponse(type=StudentInfo.class)
+    @ApiJsonResponse({
+            @ApiField(name="studentId",value="学生ID"),
+            @ApiField(name="name",value="学生姓名"),
+            @ApiField(name="gender",value="学生性别（1男，2女）",allowableValues = "1,2"),
+            @ApiField(name="studentNo",value="学号")
+    })
     public JsonObject getStudent(@RequestParam("studentId") String studentId) {
         StudentInfo student = demoService.getStudent(studentId);
         return new JsonObject(student);
@@ -97,6 +102,12 @@ public class DemoController {
     @ApiOperation("分页查询学生信息")
     @ApiParamRequest({
             @ApiField(name="studentName",value="学生姓名")
+    })
+    @ApiJsonResponse(isArray = true,value={
+            @ApiField(name="studentId",value="学生ID"),
+            @ApiField(name="name",value="学生姓名"),
+            @ApiField(name="gender",value="学生性别（1男，2女）",allowableValues = "1,2"),
+            @ApiField(name="studentNo",value="学号")
     })
     public JsonObject listStudent(String studentName, @ApiIgnore Page page) {
         List<StudentInfo> studentInfos = demoService.listStudent(studentName, page);
