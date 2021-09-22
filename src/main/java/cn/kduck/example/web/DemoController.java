@@ -12,6 +12,7 @@ import cn.kduck.example.service.StudentInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,7 +42,7 @@ public class DemoController {
     })
     public JsonObject addClass(ClassInfo classInfo) {
         demoService.addClass(classInfo);
-        return JsonObject.SUCCESS;
+        return new JsonObject(classInfo.getClassId());
     }
 
     @PostMapping("/student/add")
@@ -55,7 +56,7 @@ public class DemoController {
     })
     public JsonObject addStudent(Long classId,StudentInfo studentInfo) {
         demoService.addStudent(classId,studentInfo);
-        return JsonObject.SUCCESS;
+        return new JsonObject(studentInfo.getStudentId());
     }
 
     @PutMapping("/student/update")
@@ -82,7 +83,7 @@ public class DemoController {
         return JsonObject.SUCCESS;
     }
 
-    @PutMapping("/student/get")
+    @GetMapping("/student/get")
     @ApiOperation("查看学生信息")
     @ApiParamRequest({
             @ApiField(name="studentId",value="学生ID")
@@ -98,7 +99,7 @@ public class DemoController {
         return new JsonObject(student);
     }
 
-    @PutMapping("/student/list")
+    @GetMapping("/student/list")
     @ApiOperation("分页查询学生信息")
     @ApiParamRequest({
             @ApiField(name="studentName",value="学生姓名")
